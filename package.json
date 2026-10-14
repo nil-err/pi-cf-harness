@@ -1,0 +1,23 @@
+{
+  "name": "pi-cf-harness",
+  "description": "Pi Durable harness (PiHarness) running in a Cloudflare Durable Object via the Agents SDK",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit",
+    "tail": "wrangler tail"
+  },
+  "dependencies": {
+    "@earendil-works/pi-ai": "^1.2.0",
+    "@earendil-works/pi-durable": "^1.2.0",
+    "agents": "^0.28.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261014.1",
+    "typescript": "^5.9.3",
+    "wrangler": "^4.151.0"
+  }
+}

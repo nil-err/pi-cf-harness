@@ -1,0 +1,26 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "pi-cf-harness",
+  "main": "src/index.ts",
+  "upload_source_maps": true,
+  "compatibility_date": "2026-10-14",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "Assistant",
+        "class_name": "Assistant"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["Assistant"]
+    }
+  ],
+  "observability": {
+    "enabled": true
+  }
+}

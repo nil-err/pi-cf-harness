@@ -1,0 +1,11 @@
+node_modules/
+.wrangler/
+dist/
+.dev.vars
+.env
+.env.*
+*.log
+.DS_Store
+
+# Deployment-specific config (routes, vars): copy wrangler.jsonc and add yours.
+wrangler.personal.jsonc

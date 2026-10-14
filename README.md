@@ -49,6 +49,10 @@ A model spec is `{ id, name?, path?, contextWindow?, maxTokens?, reasoning?, com
 Model names, ids, and upstream routing are the gateway's business: whatever string the gateway accepts as `model` is what
 goes here.
 
+`/api/ask` re-resolves and pins the requested model on every call, so editing the catalog in a later deploy never strands
+an existing session: a session stores its model as a `provider/id` ref, and a ref the new catalog no longer serves would
+otherwise fail every prompt with `no_model`. Omit `model` to use `PI_MODEL`.
+
 ### If your gateway's providers are behind Access
 
 Gateways can route to custom providers whose own endpoints are protected by Cloudflare Access. In that case the request

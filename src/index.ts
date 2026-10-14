@@ -146,19 +146,24 @@ export class Assistant extends Agent<Env> {
     });
   }
 
-  /** Submit a prompt to the session and wait for the answer. */
+  /**
+   * Submit a prompt to the session and wait for the answer.
+   *
+   * The model is re-resolved and pinned on every ask. A session stores its model
+   * as a `provider/id` ref in this object's storage, so an id that a later deploy
+   * no longer serves would leave the session failing every prompt with `no_model`;
+   * the environment is the catalog's source of truth here.
+   */
   async ask(prompt: string, model?: string) {
     const session = this.harness.session();
-    const wanted = model?.trim();
-    if (wanted && wanted !== defaultModelId(this.env)) {
-      const models = createModels();
-      models.setProvider(gatewayProvider(this.env));
-      const resolved = models.getModel(PROVIDER_ID, wanted);
-      if (!resolved) {
-        return { status: "unanswered" as const, text: undefined, reason: undefined, error: `unknown model: ${wanted}` };
-      }
-      await session.setModel(resolved);
+    const wanted = model?.trim() || defaultModelId(this.env);
+    const models = createModels();
+    models.setProvider(gatewayProvider(this.env));
+    const resolved = models.getModel(PROVIDER_ID, wanted);
+    if (!resolved) {
+      return { status: "unanswered" as const, text: undefined, reason: undefined, error: `unknown model: ${wanted}` };
     }
+    await session.setModel(resolved);
     const { text, status, reason } = await this.harness.prompt(prompt);
     return { status, text, reason, error: undefined };
   }

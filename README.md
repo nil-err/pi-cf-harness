@@ -1,3 +1,7 @@
+> **已退役 2026-10-16**：pi-durable CF 主控不再使用，Cloudflare 上的部署已删除
+> （Worker `pi-cf-harness`、Access 应用 `pi-harness`、DNS `pi-harness.teyvat.org` 均已移除）。
+> 本仓库保留作代码存档，不再维护。模型层现统一走 magpie（`magpie.teyvat.org`）。
+
 # pi-cf-harness
 
 Run the [Pi Durable](https://earendil.com/posts/pi-durable/) harness in a Cloudflare Durable Object with
